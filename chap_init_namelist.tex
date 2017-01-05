@@ -1,0 +1,436 @@
+\chapter{Initialization Namelist Options}
+\label{chap:init_atm_namelist}
+
+\def\bsq#1{\lq{#1}\rq}This chapter summarizes the complete set of namelist options available when running the MPAS non-hydrostatic atmosphere initialization core.  The applicability of certain options depends on the type of initial conditions to be created --- idealized or \bsq{real-data} --- and such applicability is identified in the description when it exists.
+
+ Date-time strings throughout all MPAS namelists assume a common format. Specifically, time intervals are of the form {\tt \bsq{[DDD\_]HH:MM:SS[.sss]}}, where {\tt DDD} is an integer number of days with any number of digits, {\tt HH} is a two-digit hour value, {\tt MM} is a two-digit minute value, {\tt SS} is a two-digit second value, and {\tt sss} are fractions of a second with any number of digits; any part of the time interval format in square brackets ({\tt [ ]}) may be omitted, and if days are omitted, {\tt HH} may be either a one- or two-digit hour specification.  Time instants (e.g., start time or end time) are of the form {\tt \bsq{YYYY-MM-DD[\_HH:MM:SS[.sss]]}}, where {\tt YYYY} is an integer year with any number of digits, {\tt MM} is a two-digit month value, {\tt DD} is a two-digit day value, and {\tt HH:MM:SS.sss} is a time with the same format as in a time interval specification. For both time instants and time intervals, a value of {\tt \bsq{none}} represents \bsq{no value}.
+
+\renewcommand{\arraystretch}{1.5}
+\hypertarget{irec:nhyd_model}{}
+\section{nhyd\_model}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_init_case}
+\noindent\textbf{\large{config\_init\_case}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Type of initial conditions to create: \newline                                         1 = Jablonowski \& Williamson barolinic wave (no initial perturbation), \newline                                         2 = Jablonowski \& Williamson barolinic wave (with initial perturbation), \newline                                         3 = Jablonowski \& Williamson barolinic wave (with normal-mode perturbation), \newline                                         4 = squall line, \newline                                         5 = super-cell, \newline                                         6 = mountain wave, \newline                                         7 = real-data initial conditions from, e.g., GFS, \newline                                         8 = surface field (SST, sea-ice) update file for use with real-data simulations} \\ \hline
+Possible Values & 1 -- 8 \textit{(default: 7)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_calendar_type}
+\noindent\textbf{\large{config\_calendar\_type}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Simulation calendar type (hidden by default)} \\ \hline
+Possible Values & `gregorian',`gregorian\_noleap' \textit{(default: gregorian)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_start_time}
+\noindent\textbf{\large{config\_start\_time}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Time to begin processing first-guess data (cases 7 and 8 only)} \\ \hline
+Possible Values & `YYYY-MM-DD\_hh:mm:ss' \textit{(default: 2010-10-23\_00:00:00)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_stop_time}
+\noindent\textbf{\large{config\_stop\_time}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Time to end processing first-guess data (case 8 only)} \\ \hline
+Possible Values & `YYYY-MM-DD\_hh:mm:ss' \textit{(default: 2010-10-23\_00:00:00)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_theta_adv_order}
+\noindent\textbf{\large{config\_theta\_adv\_order}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Horizontal advection order for theta} \\ \hline
+Possible Values & 2, 3, or 4 \textit{(default: 3)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_coef_3rd_order}
+\noindent\textbf{\large{config\_coef\_3rd\_order}} (real) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Upwinding coefficient in the 3rd order advection scheme} \\ \hline
+Possible Values & 0 $\leq$ config\_coef\_3rd\_order $\leq$ 1 \textit{(default: 0.25)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_num_halos}
+\noindent\textbf{\large{config\_num\_halos}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Number of halo layers for fields (hidden by default)} \\ \hline
+Possible Values & Integer values, typically 2 or 3; DO NOT CHANGE \textit{(default: 2)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:dimensions}{}
+\section{dimensions}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nvertlevels}
+\noindent\textbf{\large{config\_nvertlevels}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The number of vertical levels to be used in the model} \\ \hline
+Possible Values & Positive integer values \textit{(default: 41)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nsoillevels}
+\noindent\textbf{\large{config\_nsoillevels}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The number of vertical soil levels needed by LSM in the model (case 7 only)} \\ \hline
+Possible Values & Positive integer values \textit{(default: 4)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nfglevels}
+\noindent\textbf{\large{config\_nfglevels}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The number of atmospheric levels (including surface and sea-level) in the first-guess dataset (case 7 only)} \\ \hline
+Possible Values & Positive integer values \textit{(default: 38)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nfgsoillevels}
+\noindent\textbf{\large{config\_nfgsoillevels}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The number of vertical soil levels in the first-guess dataset (case 7 only)} \\ \hline
+Possible Values & Positive integer values \textit{(default: 4)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_months}
+\noindent\textbf{\large{config\_months}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The number of months in a year (hidden by default)} \\ \hline
+Possible Values & Positive integer values \textit{(default: 12)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:data_sources}{}
+\section{data\_sources}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_geog_data_path}
+\noindent\textbf{\large{config\_geog\_data\_path}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Path to the WPS static data files (case 7 only)} \\ \hline
+Possible Values & Any valid path \textit{(default: /glade/p/work/wrfhelp/WPS\_GEOG/)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_met_prefix}
+\noindent\textbf{\large{config\_met\_prefix}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Filename prefix of ungrib intermediate file to use for initial conditions (case 7 only)} \\ \hline
+Possible Values & Any alpha-numeric string \textit{(default: CFSR)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_sfc_prefix}
+\noindent\textbf{\large{config\_sfc\_prefix}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Filename prefix of ungrib intermediate file to use for SST and sea-ice (cases 7 and 8 only)} \\ \hline
+Possible Values & Any alpha-numeric string \textit{(default: SST)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_fg_interval}
+\noindent\textbf{\large{config\_fg\_interval}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Interval between SST and sea-ice files (case 8 only)} \\ \hline
+Possible Values & [DDD\_]hh:mm:ss \textit{(default: 86400)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_landuse_data}
+\noindent\textbf{\large{config\_landuse\_data}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{The land use classification to use (case 7 only)} \\ \hline
+Possible Values & `USGS' or `MODIFIED\_IGBP\_MODIS\_NOAH' \textit{(default: USGS)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_use_spechumd}
+\noindent\textbf{\large{config\_use\_spechumd}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to use specific-humidity as the first-guess moisture variable. If this option is False, relative humidity will be used.} \\ \hline
+Possible Values & true or false \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:vertical_grid}{}
+\section{vertical\_grid}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_ztop}
+\noindent\textbf{\large{config\_ztop}} (real) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{m} \\ \hline
+Description & \textit{Model top height} \\ \hline
+Possible Values & Positive real values \textit{(default: 30000.0)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nsmterrain}
+\noindent\textbf{\large{config\_nsmterrain}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Number of smoothing passes to apply to the interpolated terrain field} \\ \hline
+Possible Values & Non-negative integer values \textit{(default: 1)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_smooth_surfaces}
+\noindent\textbf{\large{config\_smooth\_surfaces}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to smooth zeta surfaces} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_dzmin}
+\noindent\textbf{\large{config\_dzmin}} (real) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Minimum thickness of layers as a fraction of nominal thickness} \\ \hline
+Possible Values & Real values in the interval (0,1) \textit{(default: 0.3)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_nsm}
+\noindent\textbf{\large{config\_nsm}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Maximum number of smoothing passes for coordinate surfaces} \\ \hline
+Possible Values & Positive integer values \textit{(default: 30)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_tc_vertical_grid}
+\noindent\textbf{\large{config\_tc\_vertical\_grid}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to use the vertical layer profile that was developed for use in real-time TC experiments} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:preproc_stages}{}
+\section{preproc\_stages}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_static_interp}
+\noindent\textbf{\large{config\_static\_interp}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to interpolate WPS static data (case 7 only)} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_native_gwd_static}
+\noindent\textbf{\large{config\_native\_gwd\_static}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to recompute sub-grid-scale orography statistics directly on the native MPAS mesh (case 7 only)} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_gwd_cell_scaling}
+\noindent\textbf{\large{config\_gwd\_cell\_scaling}} (real) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Scaling factor for the effective grid cell diameter used in computation of GWD static fields (hidden by default)} \\ \hline
+Possible Values & Positive real values \textit{(default: 1.0)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_vertical_grid}
+\noindent\textbf{\large{config\_vertical\_grid}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to generate vertical grid} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_met_interp}
+\noindent\textbf{\large{config\_met\_interp}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to interpolate first-guess fields from intermediate file} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_input_sst}
+\noindent\textbf{\large{config\_input\_sst}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to re-compute SST and sea-ice fields from surface input data set; should be set to .true. when running case 8} \\ \hline
+Possible Values & true or false \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_frac_seaice}
+\noindent\textbf{\large{config\_frac\_seaice}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to switch sea-ice threshold from 0.5 to 0.02} \\ \hline
+Possible Values & true or false \textit{(default: true)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:io}{}
+\section{io}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_pio_num_iotasks}
+\noindent\textbf{\large{config\_pio\_num\_iotasks}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Number of tasks to perform file I/O} \\ \hline
+Possible Values & Integer valued, 0 $\leq$ config\_pio\_num\_iotasks $\leq$ \# MPI tasks, 0 indicates all tasks perform I/O \textit{(default: 0)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_pio_stride}
+\noindent\textbf{\large{config\_pio\_stride}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Stride between file I/O tasks} \\ \hline
+Possible Values & Integer valued, $\leq$ (\# MPI tasks) / config\_pio\_num\_iotasks \textit{(default: 1)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{irec:decomposition}{}
+\section{decomposition}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_block_decomp_file_prefix}
+\noindent\textbf{\large{config\_block\_decomp\_file\_prefix}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Prefix of graph decomposition file, to be suffixed with the MPI task count} \\ \hline
+Possible Values & Any valid filename \textit{(default: x1.40962.graph.info.part.)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_number_of_blocks}
+\noindent\textbf{\large{config\_number\_of\_blocks}} (integer) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Number of blocks to assign to each MPI task (hidden by default)} \\ \hline
+Possible Values & Positive integer values \textit{(default: 0)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_explicit_proc_decomp}
+\noindent\textbf{\large{config\_explicit\_proc\_decomp}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to use an explicit mapping of blocks to MPI tasks (hidden by default)} \\ \hline
+Possible Values & .true. or .false. \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{inl:config_proc_decomp_file_prefix}
+\noindent\textbf{\large{config\_proc\_decomp\_file\_prefix}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Prefix of block mapping file (hidden by default)} \\ \hline
+Possible Values & Any valid filename \textit{(default: graph.info.part.)} \\ \hline
+\end{tabular} 
+\end{minipage}
