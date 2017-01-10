@@ -222,7 +222,7 @@ Possible Values & Non-negative real values \textit{(default: 0.05)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{Scaling factor for the divergent component of $\nabla^4 u$ calculation (hidden by default)} \\ \hline
-Possible Values & Positive real values \textit{(default: 1.0)} \\ \hline
+Possible Values & Positive real values \textit{(default: 10.0)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -352,9 +352,9 @@ Possible Values & 0 $\leq$ config\_coef\_3rd\_order $\leq$ 1 \textit{(default: 0
 \hypertarget{mnl:config_smagorinsky_coef}
 \noindent\textbf{\large{config\_smagorinsky\_coef}} (real) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 0.125)} \\ \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Dimensionless empirical parameter relating the strain tensor to the eddy viscosity in the Smagorinsky turbulence model (hidden by default)} \\ \hline
+Possible Values & Real values typically in the range 0.1 to 0.4 \textit{(default: 0.125)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -396,9 +396,9 @@ Possible Values & Positive real values \textit{(default: 0.025)} \\ \hline
 \hypertarget{mnl:config_smdiv_p_forward}
 \noindent\textbf{\large{config\_smdiv\_p\_forward}} (real) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD} \\ \hline
-Possible Values & TBD \textit{(default: 0.1)} \\ \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Fractional forward weighting of the pressure during the acoustic step --- a form of 3D divergence damping} \\ \hline
+Possible Values & Real values typically in the range 0 to 0.2 \textit{(default: 0.1)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -419,7 +419,7 @@ Possible Values & 0 $\leq$ config\_apvm\_upwinding $\leq$ 1 \textit{(default: 0.
 \noindent\textbf{\large{config\_h\_ScaleWithMesh}} (logical) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
-Description & \textit{Scale eddy viscosities with mesh-density function for horizontal diffusion} \\ \hline
+Description & \textit{Scale eddy viscosities with mesh-density function for horizontal diffusion (hidden by default)} \\ \hline
 Possible Values & .true. or .false. \textit{(default: true)} \\ \hline
 \end{tabular} 
 \end{minipage}
@@ -584,12 +584,48 @@ Possible Values & .true. or .false. \textit{(default: true)} \\ \hline
 
 \vspace{10mm}
 \noindent\begin{minipage}{\textwidth}
+\hypertarget{mnl:config_print_detailed_minmax_vel}
+\noindent\textbf{\large{config\_print\_detailed\_minmax\_vel}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to print the global min/max of horizontal normal velocity and vertical velocity each timestep, along with the location in the domain where those extrema occurred} \\ \hline
+Possible Values & .true. or .false. \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
 \hypertarget{mnl:config_print_global_minmax_sca}
 \noindent\textbf{\large{config\_print\_global\_minmax\_sca}} (logical) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{Whether to print the global min/max of scalar fields each timestep (hidden by default)} \\ \hline
 Possible Values & .true. or .false. \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+\hypertarget{mrec:IAU}{}
+\section{IAU}
+\small
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{mnl:config_IAU_option}
+\noindent\textbf{\large{config\_IAU\_option}} (character) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Incremental Analysis Update scheme} \\ \hline
+Possible Values & `off' or `on'; `off' turns off IAU, `on' uses equal weighting of increments across the IAU window \textit{(default: off)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{mnl:config_IAU_window_length_s}
+\noindent\textbf{\large{config\_IAU\_window\_length\_s}} (real) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{s} \\ \hline
+Description & \textit{Length of window over which analysis increments are applied} \\ \hline
+Possible Values & Non-negative real values \textit{(default: 21600.)} \\ \hline
 \end{tabular} 
 \end{minipage}
 \hypertarget{mrec:physics}{}
@@ -680,7 +716,7 @@ Possible Values & Positive integers \textit{(default: 4)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{logical for configuration of fractional sea-ice (hidden by default)} \\ \hline
-Possible Values & .true. for sea-ice between 0 or 1; .false. for sea-ice equal to 0 or 1 (flag). \textit{(default: false)} \\ \hline
+Possible Values & .true. for sea-ice between 0 or 1; .false. for sea-ice equal to 0 or 1 (flag). \textit{(default: true)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -747,6 +783,28 @@ Possible Values & .true. for slowly time-varying deep soil temperatures; .false.
 Units & \textit{-} \\ \hline
 Description & \textit{logical for configuration of input ozone data in RRMTG long- and short-wave radiation (hidden by default)} \\ \hline
 Possible Values & .true. for using monthly-varying ozone data; .false. for using fixed vertical profile \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{mnl:config_microp_re}
+\noindent\textbf{\large{config\_microp\_re}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{logical for calculation of the effective radii for cloud water, cloud ice, and snow (hidden by default)} \\ \hline
+Possible Values & .true. for calculating effective radii; .false. for using defaults in RRTMG radiation \textit{(default: false)} \\ \hline
+\end{tabular} 
+\end{minipage}
+
+\vspace{10mm}
+\noindent\begin{minipage}{\textwidth}
+\hypertarget{mnl:config_ysu_pblmix}
+\noindent\textbf{\large{config\_ysu\_pblmix}} (logical) \\ 
+\begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
+Units & \textit{-} \\ \hline
+Description & \textit{logical for turning on/off top-down, radiation\_driven mixing (hidden by default)} \\ \hline
+Possible Values & .true. to turn on top-down radiation\_driven mixing; .false. otherwise \textit{(default: false)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -845,7 +903,7 @@ Possible Values & `DD\_HH:MM:SS' or `none' \textit{(default: none)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{Choice of physics suite} \\ \hline
-Possible Values & `mesoscale\_reference',`none' \textit{(default: mesoscale\_reference)} \\ \hline
+Possible Values & `mesoscale\_reference',`convection\_permitting',`none' \textit{(default: mesoscale\_reference)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -856,7 +914,7 @@ Possible Values & `mesoscale\_reference',`none' \textit{(default: mesoscale\_ref
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{configuration for cloud microphysics schemes (hidden by default)} \\ \hline
-Possible Values & `suite',`wsm6',`off' \textit{(default: suite)} \\ \hline
+Possible Values & `suite',`mp\_wsm6',`mp\_thompson',`mp\_kessler',`off' \textit{(default: suite)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -867,7 +925,7 @@ Possible Values & `suite',`wsm6',`off' \textit{(default: suite)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{configuration for convection schemes (hidden by default)} \\ \hline
-Possible Values & `suite',`kain\_fritsch',`tiedtke',`off' \textit{(default: suite)} \\ \hline
+Possible Values & `suite',`cu\_kain\_fritsch',`cu\_tiedtke',`cu\_ntiedtke',`cu\_grell\_freitas',`off' \textit{(default: suite)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -889,7 +947,7 @@ Possible Values & `suite',`noah',`off' \textit{(default: suite)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{configuration for planetary boundary layer schemes (hidden by default)} \\ \hline
-Possible Values & `suite',`ysu',`off' \textit{(default: suite)} \\ \hline
+Possible Values & `suite',`bl\_ysu',`bl\_mynn',`off' \textit{(default: suite)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -900,7 +958,7 @@ Possible Values & `suite',`ysu',`off' \textit{(default: suite)} \\ \hline
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{configuration of gravity wave drag over orography (hidden by default)} \\ \hline
-Possible Values & `suite',`ysu\_gwdo',`off' \textit{(default: suite)} \\ \hline
+Possible Values & `suite',`bl\_ysu\_gwdo',`off' \textit{(default: suite)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -944,7 +1002,7 @@ Possible Values & `suite',`rrtmg\_sw',`cam\_sw',`off' \textit{(default: suite)} 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
 Units & \textit{-} \\ \hline
 Description & \textit{configuration for surface layer-scheme (hidden by default)} \\ \hline
-Possible Values & `suite',`monin\_obukhov',`off' \textit{(default: suite)} \\ \hline
+Possible Values & `suite',`sf\_monin\_obukhov',`sf\_mynn',`off' \textit{(default: suite)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -953,9 +1011,9 @@ Possible Values & `suite',`monin\_obukhov',`off' \textit{(default: suite)} \\ \h
 \hypertarget{mnl:config_gfconv_closure_deep}
 \noindent\textbf{\large{config\_gfconv\_closure\_deep}} (integer) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 0)} \\ \hline
+Units & \textit{-} \\ \hline
+Description & \textit{closure option for deep convection in Grell-Freitas convection scheme (hidden by default)} \\ \hline
+Possible Values & 0 \textit{(default: 0)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -964,9 +1022,9 @@ Possible Values & TBD \textit{(default: 0)} \\ \hline
 \hypertarget{mnl:config_gfconv_closure_shallow}
 \noindent\textbf{\large{config\_gfconv\_closure\_shallow}} (integer) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 8)} \\ \hline
+Units & \textit{-} \\ \hline
+Description & \textit{closure option for shallow convection in Grell-Freitas convection scheme (hidden by default)} \\ \hline
+Possible Values & 8 \textit{(default: 8)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -1008,9 +1066,9 @@ Possible Values & Positive real values \textit{(default: 100.0)} \\ \hline
 \hypertarget{mnl:config_oml1d}
 \noindent\textbf{\large{config\_oml1d}} (logical) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: false)} \\ \hline
+Units & \textit{-} \\ \hline
+Description & \textit{Whether to activate the 1-d ocean mixed-layer model (hidden by default)} \\ \hline
+Possible Values & .true. or .false. \textit{(default: false)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -1019,9 +1077,9 @@ Possible Values & TBD \textit{(default: false)} \\ \hline
 \hypertarget{mnl:config_oml_hml0}
 \noindent\textbf{\large{config\_oml\_hml0}} (real) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 30.0)} \\ \hline
+Units & \textit{m} \\ \hline
+Description & \textit{If greater than zero, provides the constant, initial mixed-layer depth; if zero, initial mixed-layer depth will be taken from the `oml\_initial` field. (hidden by default)} \\ \hline
+Possible Values & Non-negative real values \textit{(default: 30.0)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -1030,9 +1088,9 @@ Possible Values & TBD \textit{(default: 30.0)} \\ \hline
 \hypertarget{mnl:config_oml_gamma}
 \noindent\textbf{\large{config\_oml\_gamma}} (real) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 0.14)} \\ \hline
+Units & \textit{K m\textsuperscript{-1}} \\ \hline
+Description & \textit{Deep water lapse rate in 1-d OML model (hidden by default)} \\ \hline
+Possible Values & Real values \textit{(default: 0.14)} \\ \hline
 \end{tabular} 
 \end{minipage}
 
@@ -1041,8 +1099,8 @@ Possible Values & TBD \textit{(default: 0.14)} \\ \hline
 \hypertarget{mnl:config_oml_relaxation_time}
 \noindent\textbf{\large{config\_oml\_relaxation\_time}} (real) \\ 
 \begin{tabular}{|p{.3\textwidth-2\tabcolsep} |p{.7\textwidth-2\tabcolsep} |} \hline
-Units & \textit{TBD} \\ \hline
-Description & \textit{TBD (hidden by default)} \\ \hline
-Possible Values & TBD \textit{(default: 864000.)} \\ \hline
+Units & \textit{s} \\ \hline
+Description & \textit{Relaxation time to initial values in 1-d OML (hidden by default)} \\ \hline
+Possible Values & Non-negative real values \textit{(default: 864000.)} \\ \hline
 \end{tabular} 
 \end{minipage}

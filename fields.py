@@ -204,3 +204,4 @@ for var in var_list:
 	f.write('\\end{tabular} \n\\end{minipage}\n')
 
 f.close()
+print("Done with chap_fields.tex")

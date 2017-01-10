@@ -23,6 +23,7 @@ def translate(string):
 			s[i] = s[i].replace('_', '\\_')
 			s[i] = s[i].replace('^', '\\textsuperscript')
 			s[i] = s[i].replace('ampersand', '\\&')
+			s[i] = s[i].replace('&', '\\&')
 		else:
 			s[i] = '$'+s[i]+'$'
 		str += s[i]
@@ -84,7 +85,7 @@ for sec in reg:
 #		var[5] = option is hidden by default (T or F)
 
 f.close()
-
+print("Done with chap_model_namelist.tex")
 
 # Then do the initialization namelist options
 reg = parseRegistry('Registry_init.xml')
@@ -109,3 +110,4 @@ for sec in reg:
 		f.write('Possible Values & '+var[5]+' \\textit{(default: ' + var[2] + ')} \\\\ \\hline\n')
 		f.write('\\end{tabular} \n\\end{minipage}\n')
 f.close()
+print("Done with chap_init_namelist.tex")
